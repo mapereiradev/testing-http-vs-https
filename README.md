@@ -128,4 +128,12 @@ Como podemos observar en la captura anterior, si nos dirijimos a "HTML Form URL 
 
 ![](/images/wireshark03.jpg)
 
-Rellenamos el formulario en ambas y lo enviamos. Ya podríamos cancelar la herramienta tcpdump y abrir el archivo generado con Wireshark.
+En el caso de la aplicación que usa el protocolo HTTPS, estableceremos el filtro siguiente:
+
+```bash
+  http.request.method == "POST" && tcp.port == 8443
+```
+Como el tráfico de red está encriptado, el filtro es incapaz de encontrar el método HTTP (POST) usado en el formulario para enviar información.
+
+Con este sencillo ejemplo se ha pretendido demostrar lo fácil que resulta para un atacante que desee capturar nuestro de red, ver la información que enviamos a través del protocolo HTTP. Por tanto, se recomienda siempre usar HTTPS en nuestras comunicaciones a través de la web.
+
